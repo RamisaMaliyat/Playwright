@@ -167,7 +167,7 @@ RunTest('File Upload',async ({basePage}) => {
    const path = require('path');
   // Path to your file inside 'resources' folder
 
-  const filePath = path.join(__dirname, 'resources', 'File.txt');
+  const filePath = path.join(__dirname, '../resources/File.txt');
   // Upload the file
   await basePage.locator('#file-upload').setInputFiles(filePath);
 
@@ -185,14 +185,14 @@ RunTest('File Upload',async ({basePage}) => {
 RunTest('File Download',async ({basePage}) => {
   const ClickFileDownload=  await basePage.getByRole('link', {name: 'File Download', exact: true});
   ClickFileDownload.click();
-  const fileName = 'some-file.txt'; // file name
+  const fileName = 'image2.jpeg'; // file name
     // Click the file link
   await basePage.getByRole('link', { name: fileName }).click();
   
    const path = require('path'); //Imports Node.js path module.
 
   // Path to your file inside 'resources' folder
-   const filePath = path.join(__dirname, 'resources', fileName);
+   const filePath = path.resolve(__dirname, '../resources', fileName); 
    //Start listening for a download event.
   const downloadPromise = basePage.waitForEvent('download');
    const download = await downloadPromise; // This waits until: A file download starts and Playwright captures it
@@ -201,7 +201,7 @@ RunTest('File Download',async ({basePage}) => {
 
 });
 
-<a href="/jqueryui/menu">JQuery UI Menus</a>
+
 
 RunTest('Enable Disable',async ({basePage}) => {
   const ClickJQuery=  await basePage.getByRole('link', {name: 'JQuery UI Menus', exact: true});

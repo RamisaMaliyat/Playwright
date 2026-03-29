@@ -65,39 +65,45 @@ expect(allLoaded).toBeTruthy();
 
 // Validate Alt Text
 
- const genericWords = ['image', 'photo', 'picture', 'img'];
+ const genericWords = ['image', 'photo', 'picture', 'img']; // We define a list of generic words that are not meaningful as alt text. If an image’s alt text is exactly one of these words, it will be considered invalid.
     const invalidImages = await images.evaluateAll((nodes, genericWords) => {
         return nodes
             .map(node => {
-                const alt = node.getAttribute('alt');
-                const src = node.getAttribute('src');
+                const alt = node.getAttribute('alt'); //alt: reads the image’s alt attribute.
 
-                // 1️⃣ Missing alt attribute
-                if (alt === null) return `Missing alt attribute: ${src}`;
+                const src = node.getAttribute('src'); // src: reads the image’s src attribute (so we know which image fails, for logging).
 
-                const trimmedAlt = alt.trim().toLowerCase();
+                // Missing alt attribute
+                if (alt === null)
+                    return `Missing alt attribute: ${src}`;
 
-                // 2️⃣ Allow decorative images (empty alt)
-                if (trimmedAlt === '') return null;
+                const trimmedAlt = alt.trim().toLowerCase(); // Remove extra spaces and normalize to lowercase for comparison.
 
-                // 3️⃣ Generic words
-                if (genericWords.includes(trimmedAlt)) return `Generic alt text: ${src}`;
+                // Allow decorative images (empty alt)
+                if (trimmedAlt === '') 
+                    return null;
 
-                // 4️⃣ Should not start with "image of", "photo of", "picture of"
+                // Generic words
+                if (genericWords.includes(trimmedAlt)) // Alt text should not be a generic word like "image", "photo", etc.
+                    return `Generic alt text: ${src}`;
+
+                // Should not start with "image of", "photo of", "picture of"
                 if (
                     trimmedAlt.startsWith('image of') ||
                     trimmedAlt.startsWith('photo of') ||
                     trimmedAlt.startsWith('picture of')
-                ) {
+                )
+                {
                     return `Alt starts with invalid phrase: ${src}`;
                 }
 
-                // 5️⃣ Too short alt text (optional, threshold = 2 chars)
-                if (trimmedAlt.length <= 2) return `Alt too short: ${src}`;
+                // Too short alt text
+                if (trimmedAlt.length <= 2) 
+                    return `Alt too short: ${src}`; // If alt text is too short, it may not describe the image properly.
 
-                return null; // valid alt
+                return null; // valid alt: no issue detected for this image.
             })
-            .filter(Boolean); // only invalid entries
+            .filter(Boolean); // only invalid entries: The resulting array invalidImages contains only images that failed the alt-text checks.
     }, genericWords);
 
     expect(invalidImages, `Alt text issues found:\n${invalidImages.join('\n')}`).toEqual([]);

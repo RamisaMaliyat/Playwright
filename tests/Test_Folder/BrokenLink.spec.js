@@ -1,15 +1,20 @@
 const { test, expect } = require('@playwright/test');
 const e = require('express');
 
+
 test('Broken site detection',  async ({page}) =>
 {
      const url = 'https://httpstat.us/500';
 
-    try {
+    try 
+    {
         const response = await page.request.get(url);
-        if (response.status() >= 400) {
+        if (response.status() >= 400) 
+        {
             console.log('Broken link detected:', response.status());
-        } else {
+        } 
+        else 
+        {
             console.log('Link is valid:', response.status());
         }
     } catch (err) {
@@ -35,17 +40,23 @@ test('Broken link detection',  async ({page}) =>
         console.log('No URL found on the link!');
         return;
     }
-      try {
-        // 3️⃣ Use APIRequestContext to fetch the link
+      try 
+      {
+        // Use APIRequestContext to fetch the link
         const response = await page.request.get(link);
 
-        // 4️⃣ Check HTTP status
-        if (response.status() >= 400) {
+        // Check HTTP status
+        if (response.status() >= 400) 
+        {
             console.log('Broken link detected:', link, response.status());
-        } else {
+        } 
+        else 
+        {
             console.log('Link is valid:',link, response.status());
         }
-    } catch (err) {
+    } 
+    catch (err) 
+    {
         console.log('Broken link detected (network error):', link, err.message);
     }
 
