@@ -64,7 +64,7 @@ test('vaid Authentication', async ({ page }) => {
      const logoutLink = page.getByRole('menuitem', { name: 'Logout' });
      await logoutLink.click();
 
-    await expect(page).toHaveURL(/login/);
+    await expect(page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
     await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
 
 
@@ -91,10 +91,8 @@ test('Session Authentication', async ({ page }) => {
      await page.reload();
      await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
 
-    //TEST TIMEOUT (Simulated): Fast forward 30 mins
-    await page.clock.fastForward('30:00');
-   await page.waitForTimeout(61000); // Wait 1 min + 1 sec
-   await page.reload();
+    
+     
    
 
 });
