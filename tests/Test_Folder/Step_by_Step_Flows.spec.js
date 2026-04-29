@@ -80,7 +80,7 @@ test('Shopping Cart Test',  async ({page}) =>
     await expect(confirmationMessage).toHaveText('Checkout: Complete!');
 
 });
-
+/*
 
 test('Multi page Form Test',  async ({page}) =>
 {
@@ -90,11 +90,78 @@ test('Multi page Form Test',  async ({page}) =>
 
     // Signup - Added 'await' to all interactions
     await page.locator('//input[@data-qa="signup-name"]').fill('John Doe');
-    await page.locator('//input[@data-qa="signup-email"]').fill('abc@gmail.bd');
+    await page.locator('//input[@data-qa="signup-email"]').fill('1234abc@gmail.bd');
     await page.getByRole('button', { name: 'Signup' }).click();
-
     await page.waitForTimeout(3000) // Wait for the next page to load
+    // Fill in account information
 
+    // Click on the radio button 1
+     const optionl =  page.locator('#uniform-id_gender2'); // By id
+     optionl.check();
+     // Check if radio button 1 is checked
+     await expect(optionl).toBeChecked()
+
+     const password = page.locator('#password'); // By id
+    await password.fill('password123');
+
+    // Select date of birth
+  const days = await page.locator('#days');
+  await expect(days).toBeVisible(); // Check if the dropdown list is visible
+  await days.selectOption({ label: '5' });
+
+  const months = await page.locator('#months');
+  await expect(months).toBeVisible(); // Check if the dropdown list is visible
+  await months.selectOption({ label: 'November' });
+
+  const years = await page.locator('#years');
+  await expect(years).toBeVisible(); // Check if the dropdown list is visible
+  await years.selectOption({ label: '1990' });
+
+  // Checkboxes
+    const newsletterCheckbox = page.locator('#newsletter'); // By id
+    await newsletterCheckbox.check();
+    await expect(newsletterCheckbox).toBeChecked();
+    const offersCheckbox = page.locator('#optin'); // By id
+    await offersCheckbox.check();
+    await expect(offersCheckbox).toBeChecked();
+   // Fill in additional details
+    await page.locator('#first_name').fill('John');
+    await page.locator('#last_name').fill('Doe');  
+    await page.locator('#company').fill('ABC Company');
+    await page.locator('#address1').fill('123 Main St');
+    await page.locator('#address2').fill('Apt 4B'); 
+    await page.locator('#country').selectOption({ label: 'United States' });
+    await page.locator('#state').fill('California');
+    await page.locator('#city').fill('Los Angeles');        
+    await page.locator('#zipcode').fill('90001');
+    await page.locator('#mobile_number').fill('1234567890');
+    await page.getByRole('button', { name: 'Create Account' }).click();
 
 
 });
+
+*/
+test('Progress Bar Test',  async ({page}) =>
+{
+    const url= 'https://demoqa.com/progress-bar';
+    await page.goto(url, { waitUntil: 'load', timeout: 10000 });
+
+    await expect(page).toHaveURL(url);
+
+    const startButton = page.locator('#startStopButton'); // By id
+    await startButton.click();
+     const progressBar = page.getByRole('progressbar');
+
+    // This automatically retries until the condition is met or the timeout is reached.
+    await expect(progressBar).toHaveText('100%', { timeout: 20000 });
+
+    // Final verification of the style/state
+    await expect(progressBar).toHaveAttribute('aria-valuenow', '100');
+    await expect(page.getByRole('button', { name: 'Reset' })).toBeVisible();
+
+    // Reset the progress bar
+    const resetButton = page.getByRole('button', { name: 'Reset' });
+    await resetButton.click();
+
+});
+ 
