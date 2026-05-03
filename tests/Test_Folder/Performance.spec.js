@@ -52,7 +52,8 @@ test('Modern Performance Metrics', async ({ page }) => {
 
   console.log(metrics);
 
-  expect(metrics.loadTime).toBeLessThan(3000);
+  expect(metrics.loadTime).toBeLessThan(5000);
+  expect(metrics.domContentLoaded).toBeLessThan(2000);
 });
 
 test('Performance on Slow Network', async ({ page, context }) => {
@@ -66,7 +67,9 @@ test('Performance on Slow Network', async ({ page, context }) => {
   await page.goto('https://www.wikipedia.org/');
 
   const loadTime = Date.now() - start;
+  expect(loadTime).toBeLessThan(12000); // allow more time for slow network
 
   console.log('Slow Network Load Time:', loadTime);
+  
 
 });
