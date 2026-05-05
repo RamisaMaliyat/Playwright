@@ -9,10 +9,11 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.0",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^25.0.10"
   }
 }
