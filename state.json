@@ -1,0 +1,77 @@
+{
+  "cookies": [
+    {
+      "name": "GeoIP",
+      "value": "BD:C:Dhaka:23.79:90.41:v4",
+      "domain": ".wikipedia.org",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "WMF-Uniq",
+      "value": "mlcJAqpaVFNo36pLFiFTLwNXAAEBAFvdnBgJgPrCM2q6J02RZTdGP10pJ9HKlCdV",
+      "domain": ".wikipedia.org",
+      "path": "/",
+      "expires": 1809529026.993159,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "WMF-Last-Access",
+      "value": "10-May-2026",
+      "domain": "www.wikipedia.org",
+      "path": "/",
+      "expires": 1781177824.048771,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "WMF-Last-Access-Global",
+      "value": "10-May-2026",
+      "domain": ".wikipedia.org",
+      "path": "/",
+      "expires": 1781177824.048932,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NetworkProbeLimit",
+      "value": "0.001",
+      "domain": "www.wikipedia.org",
+      "path": "/",
+      "expires": 1778406778.049005,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.wikipedia.org",
+      "localStorage": [
+        {
+          "name": "userPref",
+          "value": "en"
+        },
+        {
+          "name": "portal_session_id",
+          "value": "98ef6830e1f1f7b5"
+        },
+        {
+          "name": "portal_test_group_expires",
+          "value": "1778404081332"
+        },
+        {
+          "name": "translationHash",
+          "value": "151486d2"
+        }
+      ]
+    }
+  ]
+}
